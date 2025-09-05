@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Play, RotateCcw } from "lucide-react";
+import { Play, RotateCcw, BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface FlashcardProps {
@@ -100,13 +100,30 @@ const Flashcard = ({ audioUrl, word, onFlip }: FlashcardProps) => {
               </Button>
             </div>
             
-            <div className="flex-1 rounded-lg overflow-hidden border border-border shadow-inner">
-              <iframe
-                src={dictionaryUrl}
-                className="w-full h-full border-0"
-                title={`Dictionary definition for ${word}`}
-                loading="lazy"
-              />
+            <div className="flex-1 flex flex-col items-center justify-center p-8 text-center space-y-4">
+              <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-accent to-primary flex items-center justify-center shadow-lg">
+                <BookOpen className="w-8 h-8 text-primary-foreground" />
+              </div>
+              
+              <h3 className="text-2xl font-bold text-foreground mb-2">
+                {word}
+              </h3>
+              
+              <p className="text-muted-foreground mb-6">
+                View full definition and examples in Longman Dictionary
+              </p>
+              
+              <Button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(dictionaryUrl, '_blank', 'noopener,noreferrer');
+                }}
+                size="lg"
+                className="bg-gradient-to-r from-accent to-primary hover:from-primary hover:to-accent transition-all duration-300 shadow-md"
+              >
+                <BookOpen className="w-5 h-5 mr-2" />
+                Open Dictionary
+              </Button>
             </div>
           </div>
         </Card>
